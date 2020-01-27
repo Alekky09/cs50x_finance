@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy shares
+{% endblock %}
+
+{% block main %}
+    <form action="/buy" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Stock's symbol" type="text" id="symbol">
+            <input autocomplete="off" class="form-control" name="shares" placeholder="Number of stocks" type="number">
+            <input class="form-control" name="buy" type="submit">
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Stock</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id = "stocks">
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        let input = document.querySelector("#symbol");
+        input.onkeyup = function(){
+            let html = '';
+            if(input.value){
+
+                html = '<td>{{ rows["symbol"] }}</td><td>{{ rows["name"]}}</td><td>{{ rows["price"]}}</td>'
+
+            }
+            document.querySelector("#stocks").innerHTML = html;
+        };
+    </script>
+{% endblock %}
